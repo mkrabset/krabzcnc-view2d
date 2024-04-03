@@ -21,7 +21,7 @@ export interface View2dProps {
     onKeyUp?: KeyboardEventHandler | undefined;
     repaint?: (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D, real2view: m3x3) => void;
     styles?: CSSProperties | undefined;
-    dummy?:number
+    dummy?: number;
 }
 
 const defaultCenter: Vector2d = new Vector2d(0, 0);
@@ -34,7 +34,7 @@ export const View2d = (props: View2dProps) => {
     const [realCenter, setRealCenter] = useState(defaultCenter);
 
     // Zoom level measured in pixels pr real world unit
-    const [pixPrUnit, setPixPrUnit] = useState(props.initialPixPrUnit??defaultPixPrUnit);
+    const [pixPrUnit, setPixPrUnit] = useState(props.initialPixPrUnit ?? defaultPixPrUnit);
 
     // Current mouse position in View2d coordinates
     const [mousePos, setMousePos] = useState(new Vector2d(0, 0));
@@ -44,7 +44,7 @@ export const View2d = (props: View2dProps) => {
 
     const canvasId = props.canvasId ?? 'view2d';
 
-    useEffect(() => repaint(), [realCenter, pixPrUnit, props.width, props.height, props.dummy,props.repaint]);
+    useEffect(() => repaint(), [realCenter, pixPrUnit, props.width, props.height, props.dummy, props.repaint]);
 
     // Calculates matrix for transforming from real world coordinates into view coordinates
     // e.g.: (read chain backwards)
