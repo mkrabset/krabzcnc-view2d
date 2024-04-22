@@ -1,7 +1,7 @@
-import React, {CSSProperties, KeyboardEventHandler, MouseEventHandler, useEffect, useRef, useState} from 'react';
-import {Grid} from './Grid';
-import {Vector2d} from '../2d/Vector2d';
-import {Matrix3x3} from '../2d/Matrix3x3';
+import React, { CSSProperties, KeyboardEventHandler, MouseEventHandler, useEffect, useRef, useState } from 'react';
+import { Grid } from './Grid';
+import { Vector2d } from '../2d/Vector2d';
+import { Matrix3x3 } from '../2d/Matrix3x3';
 
 export type m3x3 = [[number, number, number], [number, number, number], [number, number, number]];
 
@@ -45,18 +45,16 @@ export const View2d = (props: View2dProps) => {
 
     const canvasId = props.canvasId ?? 'view2d';
 
-    const unitMultiplier: number = (props.unitMultiplier === 0 || props.unitMultiplier === undefined)
-        ? 1
-        : props.unitMultiplier
+    const unitMultiplier: number = props.unitMultiplier === 0 || props.unitMultiplier === undefined ? 1 : props.unitMultiplier;
 
     const unitScaleRef = useRef<number>(unitMultiplier);
 
     useEffect(() => repaint(), [realCenter, pixPrUnit, props.width, props.height, props.dummy, props.repaint]);
 
     useEffect(() => {
-        const prevUnitScale: number = unitScaleRef.current
-        unitScaleRef.current = unitMultiplier
-        setPixPrUnit(pixPrUnit * unitMultiplier / prevUnitScale);
+        const prevUnitScale: number = unitScaleRef.current;
+        unitScaleRef.current = unitMultiplier;
+        setPixPrUnit((pixPrUnit * unitMultiplier) / prevUnitScale);
         repaint();
     }, [props.unitMultiplier]);
 
@@ -84,7 +82,7 @@ export const View2d = (props: View2dProps) => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         // Draw grid lines and coordinate values
-        const gridR2V = Matrix3x3.chain([r2v, Matrix3x3.scale(unitMultiplier, unitMultiplier)])
+        const gridR2V = Matrix3x3.chain([r2v, Matrix3x3.scale(unitMultiplier, unitMultiplier)]);
         Grid.drawGrids(canvas, gridR2V, props.gridSizeFactor ?? defaultGridSizeFactor);
 
         if (props.repaint) {
@@ -181,7 +179,7 @@ export const View2d = (props: View2dProps) => {
                 onMouseUp={onMouseUp}
                 onKeyUp={onKeyUp}
                 onKeyDown={onKeyDown}
-                style={{background: '#fafad8', ...propStyles}}
+                style={{ background: '#fafad8', ...propStyles }}
             />
         </div>
     );

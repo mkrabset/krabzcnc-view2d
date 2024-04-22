@@ -4,7 +4,7 @@
     "type": "git",
     "url": "https://github.com/mkrabset/krabzcnc-view2d.git"
   },
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A xy-plane component with zoom/pan",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
